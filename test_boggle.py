@@ -47,5 +47,36 @@ class TestBoggle(unittest.TestCase):
         for letter in grid.values():
             self.assertIn(letter,ascii_uppercase)
         
-    
+    def test_neighbours_of_a_position(self):
+        """
+        Ensure that a position has 8 neighbours
+        """
+        coords = (1,2)
+        neighbours = boggle.neighbours_of_position(coords)
+        self.assertIn((0,1), neighbours)
+        self.assertIn((0, 2), neighbours)
+        self.assertIn((0, 3), neighbours)
+        self.assertIn((1, 1), neighbours)
+        self.assertIn((1, 3), neighbours)
+        self.assertIn((2, 1), neighbours)
+        self.assertIn((2, 2), neighbours)
+        self.assertIn((2, 3), neighbours)
+        
+        
+    def test_all_the_grid_neighbours(self):
+        """
+        Ensure that all of the grid positions have neighbours
+        """
+        grid = boggle.make_grid(2,2)
+        neighbours = boggle.all_grid_neighbours(grid)
+        self.assertEqual(len(neighbours), len(grid))
+        for pos in grid:
+            others = list (grid) # create a new list from the dictionary's keys
+            # for each position the neighbors are the other three positions on the grid so we create the 
+            #others list which is a full grid minus (-) the positioning question 
+            others.remove(pos)
+            self.assertListEqual(sorted(neighbours[pos]), sorted(others))
+        
+        
+        
     
