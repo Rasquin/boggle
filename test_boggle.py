@@ -97,11 +97,21 @@ class TestBoggle(unittest.TestCase):
         grid and should not be found. In this case we're using the assert true for 
         all three of the words 
         """
+        """
+        test creates a mock dictionary that no longer
+        matches the tuple of two sets that the program now uses. A simple fix, although
+        not the best one, is to modify the test to include the stems of the test word
+        now if we rerun the unit tests you will see that they pass with. 
+        
+        dictionary = [twoLetterWord, threeLetterWord, notThereWord]
+        """
         grid = {(0, 0): 'A', (0, 1): 'B', (1, 0): 'C', (1, 1): 'D'}
         twoLetterWord = 'AB'
         threeLetterWord = 'ABC'
         notThereWord = 'EEE'
-        dictionary = [twoLetterWord, threeLetterWord, notThereWord]
+        fullwords = [twoLetterWord, threeLetterWord, notThereWord]
+        stems = ['A', 'AB', 'E', 'EE']
+        dictionary = fullwords, stems
         
         foundWords = boggle.search(grid,dictionary)
         
